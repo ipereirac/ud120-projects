@@ -14,8 +14,9 @@ import pickle
 import sys
 sys.path.append("../tools/")
 from feature_format import featureFormat, targetFeatureSplit
-
-data_dict = pickle.load(open("../final_project/final_project_dataset.pkl", "r") )
+file = open("../final_project/final_project_dataset.pkl", "r")
+print(file)
+data_dict = pickle.load(file )
 
 ### first element is our labels, any added elements are predictor
 ### features. Keep this the same for the mini-project, but you'll
@@ -30,3 +31,13 @@ labels, features = targetFeatureSplit(data)
 ### it's all yours from here forward!  
 
 
+from sklearn import tree
+from sklearn.metrics import accuracy_score
+
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(features,labels)
+
+labels_pred = clf.predict(features)  
+
+acc = accuracy_score(labels, labels_pred)
+print(acc)
